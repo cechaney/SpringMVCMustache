@@ -2,6 +2,7 @@ package com.cec.sm.domain;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,6 +22,9 @@ public class Team implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
+    @Column
+    private String name;
 
     @OneToOne
     @JoinColumn(name = "id")
@@ -44,6 +48,14 @@ public class Team implements Serializable {
         this.id = id;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public Player getCaptain() {
         return captain;
     }
@@ -59,5 +71,6 @@ public class Team implements Serializable {
     public void setPlayers(List<Player> players) {
         this.players = players;
     }
+
 
 }

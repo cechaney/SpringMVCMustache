@@ -21,6 +21,7 @@ public class Player implements Serializable {
 
     private String email;
     private String password;
+    private String name;
     private String phone;
 
     @ManyToMany(mappedBy = "players")
@@ -30,11 +31,13 @@ public class Player implements Serializable {
         super();
     }
 
-    public Player(Long id, String email, String password) {
+    public Player(Long id, String email, String password, String name, String phone) {
         super();
         this.id = id;
         this.email = email;
         this.password = password;
+        this.name = name;
+        this.phone = phone;
     }
 
     public Long getId() {

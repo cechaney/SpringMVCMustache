@@ -1,5 +1,6 @@
 package com.cec.sm.services;
 
+import com.cec.sm.domain.LoginAttempt;
 import java.util.Date;
 import java.util.List;
 
@@ -12,19 +13,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.cec.sm.domain.LoginAttempt;
 import com.cec.sm.domain.Player;
 import com.cec.sm.repositories.LoginAttemptRepository;
-import com.cec.sm.repositories.ProfileRepository;
+import com.cec.sm.repositories.PlayerRepository;
 
 @Service
 @Repository
 @Transactional
-public class ProfileService {
+public class PlayerService {
 
     @Autowired
-    ProfileRepository profileRepository;
-
+    PlayerRepository playerRepository;
+    
     @Autowired
     LoginAttemptRepository loginAttemptRepository;
 
@@ -33,27 +33,27 @@ public class ProfileService {
 
     @Transactional(readOnly = true)
     public List<Player> findAll() {
-        return profileRepository.findAll();
+        return playerRepository.findAll();
     }
 
     @Transactional(readOnly = true)
     public Player findOne(Long id) {
-        return profileRepository.findOne(id);
+        return playerRepository.findOne(id);
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public Player create(Player profile) {
-        return profileRepository.saveAndFlush(profile);
+    public Player create(Player player) {
+        return playerRepository.saveAndFlush(player);
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public Player update(Player profile) {
-        return profileRepository.saveAndFlush(profile);
+    public Player update(Player player) {
+        return playerRepository.saveAndFlush(player);
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
     public void delete(Long id) {
-        profileRepository.delete(id);
+        playerRepository.delete(id);
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
@@ -61,12 +61,12 @@ public class ProfileService {
 
         LoginAttempt result = null;
 
-        Player profile = profileRepository.findOne(id);
+        Player player = playerRepository.findOne(id);
 
-        if (profile != null) {
+        if (player != null) {
             result = new LoginAttempt();
             result.setAttemptDate(new Date());
-            result.setProfile(profile);
+            result.setPlayer(player);
 
             result = loginAttemptRepository.saveAndFlush(result);
         }
@@ -80,7 +80,7 @@ public class ProfileService {
 
         LoginAttempt result = null;
 
-        List<Player> profiles = profileRepository.findByEmail(email);
+        List<Player> profiles = playerRepository.findByEmail(email);
 
         if (profiles != null && profiles.size() > 0) {
             result = loginById(profiles.get(0).getId());

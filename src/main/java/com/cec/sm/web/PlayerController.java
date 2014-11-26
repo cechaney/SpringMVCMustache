@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.cec.sm.web;
 
 import java.util.List;
@@ -19,28 +15,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cec.sm.domain.LoginAttempt;
 import com.cec.sm.domain.Player;
-import com.cec.sm.services.ProfileService;
-import org.springframework.web.servlet.ModelAndView;
+import com.cec.sm.services.PlayerService;
 
 @Controller
-public class ProfileController {
+public class PlayerController {
 
     @Autowired
-    ProfileService profileService;
-
-    @RequestMapping(value = "/hello", method = RequestMethod.GET)
-    public 
-    ModelAndView sayHello(HttpServletRequest req, HttpServletResponse res) {
-        
-        ModelAndView result;
-        
-        result = new ModelAndView();
-        result.setViewName("hello");
-        result.addObject("name", req.getParameter("name"));
-        
-        return result;
-        
-    }
+    PlayerService playerService;
 
     @RequestMapping(value = "/profile", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
@@ -48,7 +29,7 @@ public class ProfileController {
             HttpServletRequest req,
             HttpServletResponse res) {
 
-        return profileService.findAll();
+        return playerService.findAll();
 
     }
 
@@ -63,7 +44,7 @@ public class ProfileController {
         profile.setEmail(UUID.randomUUID() + "@email.com");
         profile.setPassword(UUID.randomUUID().toString());
 
-        return profileService.create(profile);
+        return playerService.create(profile);
 
     }
 
@@ -76,9 +57,9 @@ public class ProfileController {
             @RequestParam(required = false) String email) {
 
         if (id != null) {
-            return profileService.loginById(id);
+            return playerService.loginById(id);
         } else if (email != null) {
-            return profileService.loginByEmail(email);
+            return playerService.loginByEmail(email);
         } else {
             return null;
         }

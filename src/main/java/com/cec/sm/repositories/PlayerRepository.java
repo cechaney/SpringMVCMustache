@@ -8,8 +8,9 @@ import org.springframework.stereotype.Repository;
 import com.cec.sm.domain.Player;
 
 @Repository
-public interface ProfileRepository extends JpaRepository<Player, Long> {
+public interface PlayerRepository extends JpaRepository<Player, Long> {
 
     public List<Player> findByEmail(String email);
+    public List<Player> findByName(String name);
 
 }
