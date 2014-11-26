@@ -5,11 +5,11 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.cec.sm.domain.Profile;
+import com.cec.sm.domain.Player;
 
 @Repository
-public interface ProfileRepository extends JpaRepository<Profile, Long> {
+public interface ProfileRepository extends JpaRepository<Player, Long> {
 
-    public List<Profile> findByEmail(String email);
+    public List<Player> findByEmail(String email);
 
 }

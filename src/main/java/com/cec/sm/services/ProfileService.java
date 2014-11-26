@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cec.sm.domain.LoginAttempt;
-import com.cec.sm.domain.Profile;
+import com.cec.sm.domain.Player;
 import com.cec.sm.repositories.LoginAttemptRepository;
 import com.cec.sm.repositories.ProfileRepository;
 
@@ -32,22 +32,22 @@ public class ProfileService {
     EntityManager em;
 
     @Transactional(readOnly = true)
-    public List<Profile> findAll() {
+    public List<Player> findAll() {
         return profileRepository.findAll();
     }
 
     @Transactional(readOnly = true)
-    public Profile findOne(Long id) {
+    public Player findOne(Long id) {
         return profileRepository.findOne(id);
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public Profile create(Profile profile) {
+    public Player create(Player profile) {
         return profileRepository.saveAndFlush(profile);
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public Profile update(Profile profile) {
+    public Player update(Player profile) {
         return profileRepository.saveAndFlush(profile);
     }
 
@@ -61,7 +61,7 @@ public class ProfileService {
 
         LoginAttempt result = null;
 
-        Profile profile = profileRepository.findOne(id);
+        Player profile = profileRepository.findOne(id);
 
         if (profile != null) {
             result = new LoginAttempt();
@@ -80,7 +80,7 @@ public class ProfileService {
 
         LoginAttempt result = null;
 
-        List<Profile> profiles = profileRepository.findByEmail(email);
+        List<Player> profiles = profileRepository.findByEmail(email);
 
         if (profiles != null && profiles.size() > 0) {
             result = loginById(profiles.get(0).getId());

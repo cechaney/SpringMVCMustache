@@ -1,15 +1,17 @@
 package com.cec.sm.domain;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "profile")
-public class Profile implements Serializable {
+@Table(name = "PLAYER")
+public class Player implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -19,12 +21,16 @@ public class Profile implements Serializable {
 
     private String email;
     private String password;
+    private String phone;
 
-    public Profile() {
+    @ManyToMany(mappedBy = "players")
+    private List<Team> teams;
+
+    public Player() {
         super();
     }
 
-    public Profile(Long id, String email, String password) {
+    public Player(Long id, String email, String password) {
         super();
         this.id = id;
         this.email = email;
@@ -53,6 +59,22 @@ public class Profile implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public List<Team> getTeams() {
+        return teams;
+    }
+
+    public void setTeams(List<Team> teams) {
+        this.teams = teams;
     }
 
 }

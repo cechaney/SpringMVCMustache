@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cec.sm.domain.LoginAttempt;
-import com.cec.sm.domain.Profile;
+import com.cec.sm.domain.Player;
 import com.cec.sm.services.ProfileService;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -44,7 +44,7 @@ public class ProfileController {
 
     @RequestMapping(value = "/profile", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
-    List<Profile> findAllProfile(
+    List<Player> findAllProfile(
             HttpServletRequest req,
             HttpServletResponse res) {
 
@@ -54,11 +54,11 @@ public class ProfileController {
 
     @RequestMapping(value = "/profile/generate", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
-    Profile generateProfile(
+    Player generateProfile(
             HttpServletRequest req,
             HttpServletResponse res) {
 
-        Profile profile = new Profile();
+        Player profile = new Player();
 
         profile.setEmail(UUID.randomUUID() + "@email.com");
         profile.setPassword(UUID.randomUUID().toString());
