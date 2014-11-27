@@ -1,4 +1,4 @@
-SpringMVCMustache
+Who's got the ball
 =================
 
-A Spring MVC web started using Mustache Java templates for it's views
+A web app to provide a central contact point for on-call personel
